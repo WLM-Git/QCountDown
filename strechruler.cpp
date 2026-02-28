@@ -64,6 +64,23 @@ void StrechRuler::paintEvent(QPaintEvent *event)
     }
 }
 
+void StrechRuler::UpdateRuleHeight(float ratio)
+{
+    //根据比例计算伸缩条的高度
+    float currentHeight = RULER_MAX_HEIGHT * ratio;
+    m_rulerHeader->move(QPoint(m_rulerHeader->pos().x(),currentHeight));
+    emit rulerStrechMoveSignal(ratio);
+
+    repaint();
+}
+
+void StrechRuler::setRulerReset()
+{
+    m_rulerHeader->move(QPoint(m_rulerHeader->pos().x(),0));
+    m_currentPosY = 0;
+    repaint();
+}
+
 //接收相对位置的槽函数
 void StrechRuler::OnRulerHeadMove(float positY)
 {
@@ -78,13 +95,17 @@ void StrechRuler::OnRulerHeadMove(float positY)
     }
 
     m_rulerHeader->move(m_currentPosX,realPosY);
-
+    float ratio = realPosY / RULER_MAX_HEIGHT;
+    emit rulerStrechMoveSignal(ratio);
     repaint();
 }
 
-void StrechRuler::OnRulerHeadMoveDone(float positY)
+void StrechRuler::OnRulerHeadMoveDone()
 {
-    Q_UNUSED(positY);
     m_currentPosY = m_rulerHeader->pos().y();
     qDebug()<<m_currentPosY<<Qt::endl;
+
+    //得到进度比例并发送
+    float dialRatio = m_currentPosY / 486.0;
+    emit rulerStrechDoneSignal(dialRatio);
 }

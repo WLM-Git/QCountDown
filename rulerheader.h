@@ -14,13 +14,14 @@ private:
     void mousePressEvent(QMouseEvent* event) override;
     void mouseReleaseEvent(QMouseEvent* event) override;
     void mouseMoveEvent(QMouseEvent* event) override;
+
 private:
     QPixmap m_rulerHeader;
     QPointF last_mouse_position;
 
 signals:
     void rulerHeaderMoveSignal(float);
-    void rulerHeaderMoveDineSignal(float);
+    void rulerHeaderMoveDineSignal();
 };
 
 #endif // RULERHEADER_H

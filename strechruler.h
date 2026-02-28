@@ -10,6 +10,8 @@ class StrechRuler : public QWidget
 public:
     explicit StrechRuler(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent* event) override;
+    void UpdateRuleHeight(float ratio);
+    void setRulerReset();
 private:
     RulerHeader* m_rulerHeader;
     QPointF m_originalPosition;
@@ -17,10 +19,12 @@ private:
     float m_currentPosX;
 
 signals:
+    void rulerStrechMoveSignal(float);
+    void rulerStrechDoneSignal(float);
 
 private slots:
     void OnRulerHeadMove(float positY);
-    void OnRulerHeadMoveDone(float positY);
+    void OnRulerHeadMoveDone();
 };
 
 #endif // STRECHRULER_H

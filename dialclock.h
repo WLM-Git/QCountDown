@@ -15,6 +15,9 @@ private:
     QPixmap m_needle;
     float m_rotateValue;
 signals:
+public slots:
+    void UpDateDialClockTime(float ratio);
+
 };
 
 #endif // DIALCLOCK_H

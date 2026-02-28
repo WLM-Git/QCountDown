@@ -16,6 +16,12 @@ DialClock::DialClock(QWidget *parent)
     m_rotateValue = 0.0;
 }
 
+void DialClock::UpDateDialClockTime(float ratio)
+{
+    m_rotateValue = 360 * ratio;
+    repaint();
+}
+
 void DialClock::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event);

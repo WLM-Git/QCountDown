@@ -30,7 +30,7 @@ void RulerHeader::mousePressEvent(QMouseEvent *event)
 void RulerHeader::mouseReleaseEvent(QMouseEvent *event)
 {
     Q_UNUSED(event);
-    emit rulerHeaderMoveDineSignal(last_mouse_position.x());
+    emit rulerHeaderMoveDineSignal();
 }
 
 void RulerHeader::mouseMoveEvent(QMouseEvent *event)
